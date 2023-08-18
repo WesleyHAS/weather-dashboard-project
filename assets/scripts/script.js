@@ -18,6 +18,7 @@ var inputCity = document.getElementById('city-search');
 
 function getApi() {
   var city = inputCity.value;
+  saveHistory(city);
   var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + '&units=metric';
 
 
@@ -51,6 +52,8 @@ function getApi() {
 
       var forecastList = data.list;
 
+      nextDays.innerHTML = "";
+
       for (var i = 0; i < forecastList.length; i = i + 8) {
         var nextDaysTemp = document.createElement('div');
         var nextDaysHumidity = document.createElement('div');
@@ -70,7 +73,23 @@ function getApi() {
 
 };
 
+
+function saveHistory(cityValue){
+  var cityArray = JSON.parse(localStorage.getItem("cities")) || [];
+  cityArray.push(cityValue);
+  localStorage.setItem("cities", JSON.stringify(cityArray));
+  var historyButtons = document.getElementById('history-buttons');
+
+  historyButtons.innerHTML = "";
+
+  for (let i = 0; i < cityArray.length; i++) {
+    var cityHistory = document.createElement('button');
+    cityHistory.textContent = cityArray[i];
+    historyButtons.appendChild(cityHistory);
+    console.log(cityArray[i]);
+  }
+
+}
+
+
 //use bootstrap to style the page
-//clear the 5 days before appending more days
-//save the city on the local storage to be able to click again
-//be able to choose the city on the input, currently only retrieving the var calgary
