@@ -9,6 +9,7 @@ var humidity = document.getElementById('current-humidity');
 var wind = document.getElementById('current-wind');
 var nextDays = document.getElementById('five-day-forecast');
 var inputCity = document.getElementById('city-search');
+var messageDisplay = document.getElementById('message-display'); // Define the message display element
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
@@ -63,20 +64,24 @@ function fiveDayForecast(lat, lon){
   })
 }
 
-
-// fetchButton.addEventListener('click', getApi);
 fetchButton.addEventListener('click', function() {
   var city = inputCity.value.trim();
+  if (!city) {
+    messageDisplay.textContent = "Please enter a city name."; // Display a message if no city is entered
+    return;
+  }
   saveHistory(city);
   getApi(city);
+  messageDisplay.textContent = ""; // Clear the message display
 });
+
 
 
 function saveHistory(cityValue) {
   var cityArray = JSON.parse(localStorage.getItem("cities")) || [];
   var historyButtons = document.getElementById('history-buttons');
 
-  if (cityValue) {
+  if (cityValue && !cityArray.includes(cityValue)) {
     cityArray.push(cityValue);
     localStorage.setItem("cities", JSON.stringify(cityArray));
   }
@@ -88,16 +93,25 @@ function saveHistory(cityValue) {
     cityHistory.classList.add('city-button');
     cityHistory.textContent = cityArray[i];
 
-    // Create a closure to capture the correct city name
-    (function(cityName) {
-      cityHistory.addEventListener('click', function() {
-        getApi(cityName); // Fetch weather data for the clicked city
-      });
-    })(cityArray[i]);
+    // Attach click event listener to each city button
+    cityHistory.addEventListener('click', function() {
+      getApi(cityArray[i]); // Fetch weather data for the clicked city
+    });
 
     historyButtons.appendChild(cityHistory);
   }
 }
+
+
+var historyButtons = document.getElementById('history-buttons');
+historyButtons.addEventListener('click', function(event) {
+  if (event.target.classList.contains('city-button')) {
+    var clickedCity = event.target.textContent;
+    getApi(clickedCity); // Fetch weather data for the clicked city
+    messageDisplay.textContent = ""; // Clear the message display
+  }
+});
+
 
 saveHistory();
 });
