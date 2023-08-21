@@ -14,6 +14,17 @@ var messageDisplay = document.getElementById('message-display'); // Define the m
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 
+var clearHistoryButton = document.getElementById('clear-history-button');
+clearHistoryButton.addEventListener('click', function() {
+  clearHistory();
+  historyButtons.innerHTML = ""; // Clear the history buttons display
+  location.reload(); // Reload the page
+});
+
+function clearHistory() {
+  localStorage.removeItem("cities");
+}
+
 function getApi(city) {
   var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + '&units=metric';
 
