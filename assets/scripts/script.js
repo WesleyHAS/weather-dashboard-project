@@ -13,11 +13,15 @@ var messageDisplay = document.getElementById('message-display'); // Define the m
 
 // https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
+
 function getApi(city) {
   var queryUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + '&units=metric';
 
   fetch(queryUrl)
   .then(function (response) {
+    if (!response.ok) {
+      throw new Error("City not found"); // Throw an error for invalid city
+    }
     return response.json();
   })
   .then(function (data) {
@@ -27,12 +31,16 @@ function getApi(city) {
     humidity.textContent = 'Humidity: ' + data.main.humidity + '%';
     wind.textContent = 'Wind: ' + Math.round(data.wind.speed) * 3600/1000 + 'kph';
     fiveDayForecast(data.coord.lat, data.coord.lon);
+    messageDisplay.textContent = ""; // Clear the message display
+
+    // If the city is valid, save it to history and create a new button
+    saveHistory(city);
   })
   .catch(function (error) {
     console.error('Error fetching data:', error);
+    messageDisplay.textContent = "Invalid city entered. Please try again.";
   });
 }
-
 
 function fiveDayForecast(lat, lon){
   console.log(lat, lon);
@@ -70,11 +78,10 @@ fetchButton.addEventListener('click', function() {
     messageDisplay.textContent = "Please enter a city name."; // Display a message if no city is entered
     return;
   }
-  saveHistory(city);
-  getApi(city);
-  messageDisplay.textContent = ""; // Clear the message display
-});
 
+  // Check if the city is valid using the getApi function
+  getApi(city);
+});
 
 
 function saveHistory(cityValue) {
