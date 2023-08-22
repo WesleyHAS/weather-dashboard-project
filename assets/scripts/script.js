@@ -53,34 +53,43 @@ function getApi(city) {
   });
 }
 
-function fiveDayForecast(lat, lon){
-  console.log(lat, lon);
+function fiveDayForecast(lat, lon) {
   var queryUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
   fetch(queryUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
 
-    var forecastList = data.list;
+      var forecastList = data.list;
 
-    nextDays.innerHTML = "";
+      nextDays.innerHTML = "";
 
-    for (var i = 0; i < forecastList.length; i = i + 8) {
-      var nextDaysTemp = document.createElement('div');
-      var nextDaysHumidity = document.createElement('div');
-      var nextDaysWind = document.createElement('div');
-      nextDaysTemp.textContent = 'Temp: ' + forecastList[i].main.temp + '°C';
-      nextDaysHumidity.textContent = 'Humidity: ' + forecastList[i].main.humidity + '%';
-      nextDaysWind.textContent = 'Wind: ' + Math.round(forecastList[i].wind.speed) * 3600/1000 + 'kph';
-      nextDays.appendChild(nextDaysTemp);
-      nextDays.appendChild(nextDaysHumidity);
-      nextDays.appendChild(nextDaysWind);
-      console.log(data.length);
-    }
-  })
+      for (var i = 0; i < forecastList.length; i = i + 8) {
+        var dayForecastContainer = document.createElement('div'); // Create a container for each day's forecast
+        dayForecastContainer.classList.add('day-forecast'); // You can add a class for styling if needed
+
+        var nextDaysTemp = document.createElement('div');
+        var nextDaysHumidity = document.createElement('div');
+        var nextDaysWind = document.createElement('div');
+
+        nextDaysTemp.textContent = 'Temp: ' + forecastList[i].main.temp + '°C';
+        nextDaysHumidity.textContent = 'Humidity: ' + forecastList[i].main.humidity + '%';
+        nextDaysWind.textContent = 'Wind: ' + Math.round(forecastList[i].wind.speed) * 3600/1000 + 'kph';
+
+        // Append the three data elements to the day's container
+        dayForecastContainer.appendChild(nextDaysTemp);
+        dayForecastContainer.appendChild(nextDaysHumidity);
+        dayForecastContainer.appendChild(nextDaysWind);
+
+        nextDays.appendChild(dayForecastContainer);
+      }
+    })
+    .catch(function (error) {
+      console.error('Error fetching data:', error);
+    });
 }
 
 fetchButton.addEventListener('click', function() {
