@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Dashboard</title>
+  <!-- Link to custom reset and style CSS files -->
+  <link rel="stylesheet" href="./assets/css/reset.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <!-- Set initial viewport settings -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
   <header>
-  Weather Dashboard
+    Weather Dashboard
   </header>
   <aside id="container">
+    <!-- Search bar for city input -->
     <div class="search-city-bar">
       <h2>Search for a city:</h2>
       <input type="text" id="city-search">
       <button id="search-button">Search</button>
+      <!-- Display messages and search history -->
       <div id="message-display"></div>
       <div id="history-buttons"></div>
     </div>
-    <div id="current-day-weather">
+    <!-- Display current day's weather -->
+    <div id="current-day-weather" class="forecast-card">
+      <div id="current-date"></div>
       <div id="current-temp"></div>
       <div id="current-humidity"></div>
       <div id="current-wind"></div>
-      <!-- <div id="current-date"></div> -->
+    </div>
   </aside>
-  </div>
   <div id="container-five-days">
+    <!-- Display 5-day forecast -->
     <h2>5-Day Forecast:</h2>
     <div id="five-day-forecast"></div>
   </div>
+  <!-- Button to clear search history -->
   <button id="clear-history-button">Clear History</button>
   <footer>
-  
+    <!-- Footer content -->
   </footer>
+  <!-- Link to JavaScript file -->
   <script src="./assets/scripts/script.js"></script>
 </body>
 </html>

@@ -1,7 +1,9 @@
+/* Body styles */
 body {
   background-color: #f2f2f2;
 }
 
+/* Header styles */
 header {
   background: linear-gradient(to right, #3498db, #e74c3c);
   padding: 20px;
@@ -10,12 +12,14 @@ header {
   text-align: center;
 }
 
+/* Container styles */
 #container {
   display: flex;
   width: 100%;
   float: left;
 }
 
+/* Search bar styles */
 .search-city-bar {
   display: flex;
   flex-direction: column;
@@ -27,16 +31,19 @@ header {
   min-width: 250px;
 }
 
+/* Search bar heading styles */
 .search-city-bar h2 {
   font-size: 20px;
   margin-bottom: 10px;
 }
 
+/* Generic h2 styles */
 h2 {
   margin-left: 20px;
   font-size: 20px;
 }
 
+/* Input field styles */
 #city-search {
   width: 100%;
   padding: 8px;
@@ -45,6 +52,7 @@ h2 {
   margin-bottom: 10px;
 }
 
+/* Button styles */
 #clear-history-button {
   margin-left: 20px;
 }
@@ -60,12 +68,14 @@ h2 {
   cursor: pointer;
 }
 
+/* Button hover styles */
 #search-button:hover,
 #clear-history-button:hover,
 .city-button:hover {
   background: #2187c4;
 }
 
+/* Current day weather container styles */
 #current-day-weather {
   flex: 1;
   display: flex;
@@ -74,10 +84,11 @@ h2 {
   align-items: flex-start;
   background-color: #f2f2f2;
   padding: 20px;
-  width: 25%; 
+  width: 25%;
   float: right;
 }
 
+/* Current weather detail styles */
 #current-temp,
 #current-humidity,
 #current-wind {
@@ -86,16 +97,19 @@ h2 {
   align-content: center;
 }
 
+/* Five-day forecast container styles */
 #five-day-forecast {
   background-color: #f2f2f2;
   color: black;
   padding: 20px;
 }
 
+/* Five-day forecast heading styles */
 #five-day-forecast h3 {
   font-size: 20px;
 }
 
+/* History buttons container styles */
 #history-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -103,7 +117,17 @@ h2 {
   margin-top: 10px;
 }
 
+/* Day forecast card styles */
 .day-forecast {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Generic forecast card styles */
+.forecast-card {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
