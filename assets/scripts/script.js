@@ -13,8 +13,6 @@ var nextDays = document.getElementById('five-day-forecast');
 var inputCity = document.getElementById('city-search');
 var messageDisplay = document.getElementById('message-display'); // Define the message display element
 
-// https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
 // Clear history button event listener
 var clearHistoryButton = document.getElementById('clear-history-button');
 clearHistoryButton.addEventListener('click', function() {
